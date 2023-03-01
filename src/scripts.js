@@ -42,13 +42,18 @@ const usernameInput = document.querySelector('#username-input');
 const passwordInput = document.querySelector('#password-input');
 
 const actionPage = document.querySelector('#action-page');
+const navBanner = document.querySelector('#nav-banner');
 const logOutButton = document.querySelector('#log-out');
 
 const customerBookings = document.querySelector('#customer-bookings');
 
+const dashboard = document.querySelector('#dashboard-container');
+const newBooking = document.querySelector('#new-booking');
+
 
 loginButton.addEventListener('click', getLogin);
-logOutButton.addEventListener('click', resetSite)
+logOutButton.addEventListener('click', resetSite);
+navBanner.addEventListener('click', switchPage);
 
 
 function hide(element) {
@@ -96,7 +101,7 @@ function updateCustomerDisplay() {
   const helloCustomer = document.querySelector('#hello-customer');
   const amountSpent = document.querySelector('#amount-spent');
 
-  helloCustomer.innerText = `Hello, ${customer.name.split(' ')[0]}!`;
+  helloCustomer.innerText = `${customer.name.split(' ')[0]}`;
   amountSpent.innerText = `$${customer.spent}`;
   customerBookings.innerHTML = '';
 
@@ -120,6 +125,34 @@ function updateCustomerDisplay() {
     </article>
     `;
   });
+};
+
+function switchPage(event) {
+  if (event.target.dataset.active === 'false') {
+    event.target.dataset.value === 'new-bookings' ? switchToNewBooking() : switchToProfile();
+  };
+};
+
+function switchToProfile() {
+  const profileButton = document.querySelector('#profile-button');
+  const newBookingsButton = document.querySelector('#new-bookings-button');
+  const pageType = document.querySelector('#page-type');
+  profileButton.dataset.active = 'true';
+  newBookingsButton.dataset.active = 'false';
+  pageType.innerText = 'My Bookings';
+  show(dashboard);
+  hide(newBooking);
+};
+
+function switchToNewBooking() {
+  const profileButton = document.querySelector('#profile-button');
+  const newBookingsButton = document.querySelector('#new-bookings-button');
+  const pageType = document.querySelector('#page-type');
+  profileButton.dataset.active = 'false';
+  newBookingsButton.dataset.active = 'true';
+  pageType.innerText = 'Book a Room';
+  show(newBooking);
+  hide(dashboard);
 };
 
 function resetSite() {
