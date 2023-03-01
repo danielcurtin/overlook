@@ -1,3 +1,102 @@
-body {
+/* body {
   background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background-image: url('https://images.unsplash.com/photo-1527488982891-99714e169214?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1183&q=80');
+} */
+
+body,
+.bgImg {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.bgImg {
+  position: absolute;
+  z-index: -2;
+}
+
+.dim {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  background: black;
+  opacity: 0.5;
+}
+
+.loginPage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcomeMsg {
+  width: 30%;
+  color: white;
+  font-size: clamp(1rem, 6vw, 7rem);
+  text-align: center;
+  text-shadow: 0px 0px 10px black;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  animation: scaleFadeIn 1s ease-out 0s 1 normal forwards;
+}
+
+.loginFormContainer {
+  height: 40vh;
+  min-width: 40vw;
+  max-width: 75vw;
+  background: white;
+  box-shadow: 0px 0px 15px white;
+  border-radius: 25px;
+}
+
+.login {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: clamp(0.75rem, 2.25vw, 3rem);
+  gap: 5%;
+}
+
+.labelAndInputContainer {
+  display: flex;
+  flex-flow: column;
+  height: 25%;
+  width: 70%;
+  gap: 2%;
+}
+
+.labelAndInputContainer > input {
+  height: 30%;
+}
+
+.submitLoginInfo {
+  height: 15%;
+  min-width: 25%;
+  max-width: 75%;
+  border: 0;
+  border-radius: 5px;
+  background: crimson;
+  color: white;
+  font-size: clamp(0.75rem, 1.75vw, 2rem);
+}
+
+@keyframes scaleFadeIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
