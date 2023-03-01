@@ -10,7 +10,7 @@
 <body>
   <img class="bgImg" src="./images/bg-image.jpg" alt="sea waves on rock formation during sunrise">
   <div class="dim"></div>
-  <section class="loginPage">
+  <section class="loginPage hidden">
     <h1 class="welcomeMsg">Welcome To Overlook</h1>
     <div class="loginFormContainer">
       <form action="" class="login">
@@ -27,6 +27,102 @@
       </form>
     </div>
   </section>
+  <main>
+    <section class="userPage">
+      <nav class="sidebarNav">
+        <div class="userProfilePic"></div>
+        <div class="dateInputContainer">
+          <label class="calendarInputLabel" for="calendar"><em>Date of Stay</em></label>
+          <input type="text" class="calendarInput" id="calendar"></input>
+        </div>
+        <form class="filters">
+          <h2 class="filterHead">Room Type</h2>
+          <div class="filterItem">
+            <input class="filter" type="radio" name="room-type" id="residential">
+            <label for="residential">Residential Suite</label>
+          </div>
+          <div class="filterItem">
+            <input class="filter" type="radio" name="room-type" id="junior">
+            <label for="junior">Junior Suite</label>
+          </div>
+          <div class="filterItem">
+            <input class="filter" type="radio" name="room-type" id="suite">
+            <label for="suite">Suite</label>
+          </div>
+          <div class="filterItem">
+            <input class="filter" type="radio" name="room-type" id="single">
+            <label for="single">Single</label>
+          </div>
+        </form>
+        <button class="logOut" id="log-out">
+          <label for="log-out">Log Out</label>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </nav>
+
+      <section class="mainUserActions">
+        <header class="banner">
+          <h3 class="welcomeBackUser">Welcome back, User!</h3>
+          <div class="bannerButtonsContainer">
+            <button class="bannerButton roomsList">
+              <i class="fa-solid fa-bed"></i>
+            </button>
+            <button class="bannerButton userProfile">
+              <i class="fa-solid fa-user"></i>
+            </button>
+          </div>
+        </header>
+        <h2 class="windowText"><em>See you soon!</em></h2>
+        
+        <section class="roomsContainer">
+          <article class="room">
+            <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed" class="">
+            <div class="roomBottom">
+              <header class="roomInfo">
+                <h2 class="roomType">Residential Suite</h2>
+                <h3 class="sizeAndCount">1 Queen</h3>
+              </header>
+              <button class="bookRoomBtn">Book</button>
+            </div>
+
+          </article>
+          <article class="room">
+            <img src="./images/suite.jpg" alt="white bed linen on bed" class="">
+            <div class="roomBottom">
+              <header class="roomInfo">
+                <h2 class="roomType">Suite</h2>
+                <h3 class="sizeAndCount">1 King</h3>
+              </header>
+              <button class="bookRoomBtn">Book</button>
+            </div>
+
+          </article>
+          <article class="room">
+            <img src="./images/single room.jpg" alt="two red pillows and grey and white floral bedspread" class="">
+            <div class="roomBottom">
+              <header class="roomInfo">
+                <h2 class="roomType">Suite</h2>
+                <h3 class="sizeAndCount">2 Full</h3>
+              </header>
+              <button class="bookRoomBtn">Book</button>
+            </div>
+
+          </article>
+          <article class="room">
+            <img src="./images/junior suite.jpg" alt="black and white uplight chandelier turned on near brown sofa" class="">
+            <div class="roomBottom">
+              <header class="roomInfo">
+                <h2 class="roomType">Suite</h2>
+                <h3 class="sizeAndCount">2 Twin</h3>
+              </header>
+              <button class="bookRoomBtn">Book</button>
+            </div>
+
+          </article>
+        </section>
+      </section>
+    </section>
+  </main>
   <script src="bundle.js"></script>
 </body>
 </html>

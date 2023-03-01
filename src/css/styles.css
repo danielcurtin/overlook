@@ -1,7 +1,7 @@
-/* body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-  background-image: url('https://images.unsplash.com/photo-1527488982891-99714e169214?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1183&q=80');
-} */
+body {
+  --main-color: firebrick;
+  --secondary-color: firebrick;
+}
 
 body,
 .bgImg {
@@ -23,6 +23,10 @@ body,
   z-index: -1;
   background: black;
   opacity: 0.5;
+}
+
+button {
+  cursor: pointer;
 }
 
 .loginPage {
@@ -84,9 +88,224 @@ body,
   max-width: 75%;
   border: 0;
   border-radius: 5px;
-  background: crimson;
+  background: var(--main-color);
   color: white;
   font-size: clamp(0.75rem, 1.75vw, 2rem);
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userPage {
+  display: flex;
+  gap: 5%;
+  height: 90%;
+  width: 90%;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5%;
+  height: 100%;
+  min-width: 15%;
+  max-width: 20%;
+  background: var(--main-color);
+  position: relative;
+}
+
+.userProfilePic {
+  height: 13vw;
+  width: 13vw;
+  border-radius: 25rem;
+  margin-top: 7.5%;
+  background: black;
+  border: solid white 3px;
+  box-shadow: 0px 0px 15px white;
+}
+
+.dateInputContainer {
+  height: 20%;
+  width: 90%;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.calendarInput {
+  height: 15%;
+  width: 100%;
+  background: white;
+  border: 0;
+}
+
+.filters {
+  width: 85%;
+  display: flex;
+  flex-flow: column;
+  font-size: 1.2rem;
+  color: white;
+  gap: 8px;
+}
+
+.filterHead {
+  text-align: center;
+}
+
+.logOut {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  height: 7.5%;
+  width: 100%;
+  color: white;
+  /* position: absolute; */
+  /* bottom: 0; */
+  border: 0;
+  background: transparent;
+  font-size: 1.5rem;
+}
+
+.logOut > * {
+  margin: 0;
+  padding: 0;
+}
+
+.logOut:hover {
+  background: purple;
+}
+
+.mainUserActions {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 75%;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5%;
+  background: var(--secondary-color);
+}
+
+.welcomeBackUser {
+  margin-left: 3%;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.bannerButtonsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 20%;
+  height: 100%;
+}
+
+.bannerButton {
+  height: 100%;
+  width: 50%;
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.bannerButton:hover {
+  background: purple;
+}
+
+.windowText {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: white;
+  text-shadow: 0px 0px 5px black;
+  text-align: center;
+  overflow-wrap: normal;
+}
+
+.roomsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap;
+  column-gap: 3%;
+  row-gap: 6%;
+  height: 55%;
+  width: 100%;
+  background: white;
+  overflow-y: scroll;
+  padding-top: 3%;
+}
+
+.room {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 85%;
+  width: 45%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px black;
+}
+
+.room > img {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  width: 100%;
+  height: 65%;
+  object-fit: cover;
+}
+
+.roomInfo > * {
+  margin: 0;
+  padding: 0;
+}
+
+.roomType {
+  font-size: 1.75rem;
+}
+
+.sizeAndCount {
+  color: darkslategray;
+  font-size: 1.25rem;
+}
+
+.roomBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35%;
+  width: 85%;
+}
+
+.bookRoomBtn {
+  height: 40%;
+  width: 30%;
+  border: 0;
+  border-radius: 5px;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.bookRoomBtn:hover {
+  background: purple;
+}
+
+
+/* Hidden and Animations */
+.hidden {
+  display: none;
 }
 
 @keyframes scaleFadeIn {
