@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/6471591dde.js" crossorigin="anonymous"></script>
   <title>Overlook</title>
 </head>
 <body>
   <img class="bgImg" src="./images/bg-image.jpg" alt="sea waves on rock formation during sunrise">
   <div class="dim"></div>
-  <section class="loginPage hidden">
+  <section class="loginPage">
     <h1 class="welcomeMsg">Welcome To Overlook</h1>
     <div class="loginFormContainer">
       <form action="" class="login">
@@ -27,31 +30,33 @@
       </form>
     </div>
   </section>
-  <main>
+  <main class="actionPage hidden">
     <section class="userPage">
       <nav class="sidebarNav">
-        <div class="userProfilePic"></div>
+        <div class="userProfilePic">
+          <i class="fa-brands fa-github"></i>
+        </div>
         <div class="dateInputContainer">
-          <label class="calendarInputLabel" for="calendar"><em>Date of Stay</em></label>
+          <label class="calendarInputLabel" for="calendar">Date of Stay</label>
           <input type="text" class="calendarInput" id="calendar"></input>
         </div>
         <form class="filters">
           <h2 class="filterHead">Room Type</h2>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="residential">
-            <label for="residential">Residential Suite</label>
-          </div>
-          <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="junior">
-            <label for="junior">Junior Suite</label>
+            <input class="filter" type="radio" name="room-type" id="single">
+            <label for="single">Single</label>
           </div>
           <div class="filterItem">
             <input class="filter" type="radio" name="room-type" id="suite">
             <label for="suite">Suite</label>
           </div>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="single">
-            <label for="single">Single</label>
+            <input class="filter" type="radio" name="room-type" id="junior">
+            <label for="junior">Junior Suite</label>
+          </div>
+          <div class="filterItem">
+            <input class="filter" type="radio" name="room-type" id="residential">
+            <label for="residential">Residential Suite</label>
           </div>
         </form>
         <button class="logOut" id="log-out">
@@ -59,22 +64,84 @@
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </button>
       </nav>
-
       <section class="mainUserActions">
-        <header class="banner">
-          <h3 class="welcomeBackUser">Welcome back, User!</h3>
+        <header class="navBanner">
+          <h3 class="helloUser">Hello, Customer!</h3>
+          <h3 class="pageType">My Bookings</h3>
           <div class="bannerButtonsContainer">
-            <button class="bannerButton roomsList">
+            <button class="bannerButton roomsList" data-active="false">
               <i class="fa-solid fa-bed"></i>
             </button>
-            <button class="bannerButton userProfile">
+            <button class="bannerButton userProfile" data-active="true">
               <i class="fa-solid fa-user"></i>
             </button>
           </div>
         </header>
         <h2 class="windowText"><em>See you soon!</em></h2>
-        
-        <section class="roomsContainer">
+        <section class="dashboardContainer">
+          <section class="spentContainer">
+            <h2 class="spentHead">Thank you for spending <span class="amountSpent">$123.45</span> with us!</h2>
+          </section>
+          <section class="customerBookings">
+            <article class="room">
+              <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed" class="">
+              <div class="roomBottom">
+                <header class="roomInfo">
+                  <h2 class="roomType">Residential Suite</h2>
+                  <h3 class="sizeAndCount">1 Queen</h3>
+                </header>
+                <header class="bookedDate">
+                  <h2 class="bookedDateHead">Booked</h2>
+                  <h3 class="dateBooked">11/04/2022</h3>
+                </header>
+              </div>
+  
+            </article>
+            <article class="room">
+              <img src="./images/suite.jpg" alt="white bed linen on bed" class="">
+              <div class="roomBottom">
+                <header class="roomInfo">
+                  <h2 class="roomType">Suite</h2>
+                  <h3 class="sizeAndCount">1 King</h3>
+                </header>
+                <header class="bookedDate">
+                  <h2 class="bookedDateHead">Booked</h2>
+                  <h3 class="dateBooked">01/19/2023</h3>
+                </header>
+              </div>
+  
+            </article>
+            <article class="room">
+              <img src="./images/single room.jpg" alt="two red pillows and grey and white floral bedspread" class="">
+              <div class="roomBottom">
+                <header class="roomInfo">
+                  <h2 class="roomType">Suite</h2>
+                  <h3 class="sizeAndCount">2 Full</h3>
+                </header>
+                <header class="bookedDate">
+                  <h2 class="bookedDateHead">Booked</h2>
+                  <h3 class="dateBooked">07/06/2023</h3>
+                </header>
+              </div>
+  
+            </article>
+            <article class="room">
+              <img src="./images/junior suite.jpg" alt="black and white uplight chandelier turned on near brown sofa" class="">
+              <div class="roomBottom">
+                <header class="roomInfo">
+                  <h2 class="roomType">Suite</h2>
+                  <h3 class="sizeAndCount">2 Twin</h3>
+                </header>
+                <header class="bookedDate">
+                  <h2 class="bookedDateHead">Booked</h2>
+                  <h3 class="dateBooked">10/26/2023</h3>
+                </header>
+              </div>
+  
+            </article>
+          </section>
+        </section>
+        <section class="roomsContainer hidden">
           <article class="room">
             <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed" class="">
             <div class="roomBottom">
@@ -122,6 +189,7 @@
         </section>
       </section>
     </section>
+    <section class="managerPage"></section>
   </main>
   <script src="bundle.js"></script>
 </body>

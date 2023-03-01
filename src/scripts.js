@@ -28,5 +28,6 @@ import localeEn from 'air-datepicker/locale/en';
 import 'air-datepicker/air-datepicker.css';
 
 new AirDatepicker('#calendar', {
-    locale: localeEn
+    locale: localeEn,
+    autoClose: true
 });
