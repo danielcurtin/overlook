@@ -21,4 +21,4 @@ function postBooking(userID, date, roomNumber) {
   .catch(err => console.log(err));
 };
 
-export { getData, postBooking }
+export { getData, postBooking };
