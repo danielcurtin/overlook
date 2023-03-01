@@ -1,7 +1,24 @@
 function getData(type) {
-    return fetch(`http://localhost:3001/api/v1/${type}`)
-    .then(res => res.json())
-    .catch(err => alert(`Server Error: ${err}. Please try again later.`));
+  return fetch(`http://localhost:3001/api/v1/${type}`)
+  .then(res => res.json())
+  .catch(err => alert(`Server Error: ${err}. Please try again later.`));
 };
 
-export default getData;
+function postBooking(userID, date, roomNumber) {
+  fetch(`http://localhost:3001/api/v1/bookings`, {
+    method: 'POST',
+    body: JSON.stringify({
+      "userID": userID, 
+      "date": date,
+      "roomNumber": roomNumber
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+};
+
+export { getData, postBooking }
