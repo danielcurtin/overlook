@@ -24,7 +24,7 @@ class Customer {
   };
 
   saveBooking(room) {
-    this.bookings.push(room.getNewBooking(this.id, this.selectedDate));
+    this.bookings.push(room.getNewBooking(this.id, this.selectedDate, this.allRooms));
   };
 };
 
