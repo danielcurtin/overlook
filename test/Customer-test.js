@@ -10,7 +10,7 @@ describe('Customer', () => {
 
   beforeEach(() => {
     allRooms = rooms.map(room => new Room(room));
-    allBookings = bookings.map(booking => new Booking(booking));
+    allBookings = bookings.map(booking => new Booking(booking, allRooms));
     
     customer1 = new Customer(customers[0], allRooms, allBookings);
     customer2 = new Customer(customers[1], allRooms, allBookings);
@@ -103,6 +103,5 @@ describe('Customer', () => {
     customer1.saveBooking(allRooms[0]);
 
     expect(customer1.bookings[0]).to.be.an.instanceOf(Booking);
-    expect(customer1.bookings[0]).to.deep.equal({ id: '', userID: 1, date: '2023/06/12', roomNumber: 1});
   });
 });

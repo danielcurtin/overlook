@@ -13,24 +13,24 @@
 <body>
   <img class="bgImg" src="./images/bg-image.jpg" alt="sea waves on rock formation during sunrise">
   <div class="dim"></div>
-  <section class="loginPage">
+  <section class="loginPage" id="login-page">
     <h1 class="welcomeMsg">Welcome To Overlook</h1>
     <div class="loginFormContainer">
       <form action="" class="login">
         <div class="labelAndInputContainer">
           <label for="usernameInput"><em>Username</em></label>
-          <input type="text" id="usernameInput">
+          <input type="text" id="username-input" required>
         </div>
         <div class="labelAndInputContainer">
           <label for="passwordInput"><em>Password</em></label>
-          <input type="text" id="passwordInput"> 
+          <input type="text" id="password-input" required> 
           <!-- make this^ type="password" for password censoring later -->
         </div>
-        <input type="submit" value="Login" class="submitLoginInfo">
+        <input type="submit" value="Login" class="submitLoginInfo" id="submit-login">
       </form>
     </div>
   </section>
-  <main class="actionPage hidden">
+  <main class="actionPage hidden" id="action-page">
     <section class="userPage">
       <nav class="sidebarNav">
         <div class="userProfilePic">
@@ -66,8 +66,8 @@
       </nav>
       <section class="mainUserActions">
         <header class="navBanner">
-          <h3 class="helloUser">Hello, Customer!</h3>
-          <h3 class="pageType">My Bookings</h3>
+          <h3 class="helloCustomer" id="hello-customer">Hello, Customer!</h3>
+          <h3 class="pageType" id="page-type">My Bookings</h3>
           <div class="bannerButtonsContainer">
             <button class="bannerButton roomsList" data-active="false">
               <i class="fa-solid fa-bed"></i>
@@ -80,70 +80,16 @@
         <h2 class="windowText"><em>See you soon!</em></h2>
         <section class="dashboardContainer">
           <section class="spentContainer">
-            <h2 class="spentHead">Thank you for spending <span class="amountSpent">$123.45</span> with us!</h2>
+            <h2 class="spentHead">Thank you for spending <span class="amountSpent" id="amount-spent">$123.45</span> with us!</h2>
           </section>
-          <section class="customerBookings">
-            <article class="room">
-              <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed" class="">
-              <div class="roomBottom">
-                <header class="roomInfo">
-                  <h2 class="roomType">Residential Suite</h2>
-                  <h3 class="sizeAndCount">1 Queen</h3>
-                </header>
-                <header class="bookedDate">
-                  <h2 class="bookedDateHead">Booked</h2>
-                  <h3 class="dateBooked">11/04/2022</h3>
-                </header>
-              </div>
-  
-            </article>
-            <article class="room">
-              <img src="./images/suite.jpg" alt="white bed linen on bed" class="">
-              <div class="roomBottom">
-                <header class="roomInfo">
-                  <h2 class="roomType">Suite</h2>
-                  <h3 class="sizeAndCount">1 King</h3>
-                </header>
-                <header class="bookedDate">
-                  <h2 class="bookedDateHead">Booked</h2>
-                  <h3 class="dateBooked">01/19/2023</h3>
-                </header>
-              </div>
-  
-            </article>
-            <article class="room">
-              <img src="./images/single room.jpg" alt="two red pillows and grey and white floral bedspread" class="">
-              <div class="roomBottom">
-                <header class="roomInfo">
-                  <h2 class="roomType">Suite</h2>
-                  <h3 class="sizeAndCount">2 Full</h3>
-                </header>
-                <header class="bookedDate">
-                  <h2 class="bookedDateHead">Booked</h2>
-                  <h3 class="dateBooked">07/06/2023</h3>
-                </header>
-              </div>
-  
-            </article>
-            <article class="room">
-              <img src="./images/junior suite.jpg" alt="black and white uplight chandelier turned on near brown sofa" class="">
-              <div class="roomBottom">
-                <header class="roomInfo">
-                  <h2 class="roomType">Suite</h2>
-                  <h3 class="sizeAndCount">2 Twin</h3>
-                </header>
-                <header class="bookedDate">
-                  <h2 class="bookedDateHead">Booked</h2>
-                  <h3 class="dateBooked">10/26/2023</h3>
-                </header>
-              </div>
-  
-            </article>
+          <section class="customerBookings" id="customer-bookings">
+            <!-- Customer bookings get added here -->
           </section>
         </section>
+
         <section class="roomsContainer hidden">
           <article class="room">
-            <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed" class="">
+            <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed">
             <div class="roomBottom">
               <header class="roomInfo">
                 <h2 class="roomType">Residential Suite</h2>
@@ -151,10 +97,10 @@
               </header>
               <button class="bookRoomBtn">Book</button>
             </div>
-
           </article>
+
           <article class="room">
-            <img src="./images/suite.jpg" alt="white bed linen on bed" class="">
+            <img src="./images/suite.jpg" alt="white bed linen on bed">
             <div class="roomBottom">
               <header class="roomInfo">
                 <h2 class="roomType">Suite</h2>
@@ -162,10 +108,10 @@
               </header>
               <button class="bookRoomBtn">Book</button>
             </div>
-
           </article>
+
           <article class="room">
-            <img src="./images/single room.jpg" alt="two red pillows and grey and white floral bedspread" class="">
+            <img src="./images/single room.jpg" alt="two red pillows and grey and white floral bedspread">
             <div class="roomBottom">
               <header class="roomInfo">
                 <h2 class="roomType">Suite</h2>
@@ -173,10 +119,10 @@
               </header>
               <button class="bookRoomBtn">Book</button>
             </div>
-
           </article>
+
           <article class="room">
-            <img src="./images/junior suite.jpg" alt="black and white uplight chandelier turned on near brown sofa" class="">
+            <img src="./images/junior suite.jpg" alt="black and white uplight chandelier turned on near brown sofa">
             <div class="roomBottom">
               <header class="roomInfo">
                 <h2 class="roomType">Suite</h2>
@@ -184,8 +130,8 @@
               </header>
               <button class="bookRoomBtn">Book</button>
             </div>
-
           </article>
+
         </section>
       </section>
     </section>

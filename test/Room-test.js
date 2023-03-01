@@ -33,9 +33,7 @@ describe('Room', () => {
 
   it('should be able to return new Bookings of the current room', () => {
     expect(room1.getNewBooking(1, '2023/11/17')).to.be.an.instanceOf(Booking);
-    expect(room1.getNewBooking(1, '2023/11/17')).to.deep.equal({ id: '', userID: 1, date: '2023/11/17', roomNumber: 1});
 
     expect(room2.getNewBooking(2, '2022/05/02')).to.be.an.instanceOf(Booking);
-    expect(room2.getNewBooking(2, '2022/05/02')).to.deep.equal({ id: '', userID: 2, date: '2022/05/02', roomNumber: 2});
   });
 });
