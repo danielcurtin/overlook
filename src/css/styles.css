@@ -1,6 +1,6 @@
 body {
-  --main-color: firebrick;
-  --secondary-color: firebrick;
+  --main-color: linear-gradient(1.35turn, #864BA2, #BF3A30);
+  --secondary-color: purple;
   --hover-color: darkslategray;
   font-family: 'Raleway', sans-serif;
 }
@@ -91,7 +91,7 @@ button,
   min-width: 25%;
   max-width: 75%;
   border-radius: 5px;
-  background: var(--main-color);
+  background: var(--secondary-color);
   color: white;
   font-size: clamp(0.75rem, 1.75vw, 2rem);
 }
@@ -110,7 +110,7 @@ button,
 
 .userPage {
   display: flex;
-  gap: 5%;
+  gap: 3%;
   height: 90%;
   width: 90%;
 }
@@ -201,7 +201,7 @@ button,
   justify-content: space-between;
   align-items: center;
   height: 5%;
-  background: var(--secondary-color);
+  background: var(--main-color);
   color: white;
   font-size: clamp(0.5rem, 2vw, 1.4rem);
 }
@@ -230,7 +230,7 @@ button,
 }
 
 [data-active="true"] {
-  background: purple;
+  background: orange;
 }
 
 .windowText {
@@ -281,7 +281,7 @@ button,
 }
 
 .amountSpent {
-  font-size: calc(var(--spent-msg-font) * 2);
+  font-size: calc(var(--spent-msg-font) * 1.5);
 }
 
 .room {
@@ -353,6 +353,11 @@ button,
 
 .bookRoomBtn:hover {
   background: var(--hover-color);
+}
+
+.apology {
+  text-align: center;
+  font-size: 5rem;
 }
 
 

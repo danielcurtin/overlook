@@ -20,7 +20,8 @@ import 'air-datepicker/air-datepicker.css';
 
 new AirDatepicker('#calendar', {
   locale: localeEn,
-  autoClose: true
+  autoClose: true,
+  onSelect: object => filterByDate(object.formattedDate)
 });
 
 // APIs
@@ -42,7 +43,11 @@ const usernameInput = document.querySelector('#username-input');
 const passwordInput = document.querySelector('#password-input');
 
 const actionPage = document.querySelector('#action-page');
+const sidebar = document.querySelector('#side-nav');
 const navBanner = document.querySelector('#nav-banner');
+const profileButton = document.querySelector('#profile-button');
+const newBookingsButton = document.querySelector('#new-bookings-button');
+const pageType = document.querySelector('#page-type');
 const logOutButton = document.querySelector('#log-out');
 
 const customerBookings = document.querySelector('#customer-bookings');
@@ -54,6 +59,7 @@ const newBooking = document.querySelector('#new-booking');
 loginButton.addEventListener('click', getLogin);
 logOutButton.addEventListener('click', resetSite);
 navBanner.addEventListener('click', switchPage);
+sidebar.addEventListener('click', filterRooms);
 
 
 function hide(element) {
@@ -74,12 +80,12 @@ function getLogin(event) {
 
 
   if ((parseInt(id) < 1 || parseInt(id) > 50) || (userAttempt !== `customer${id}` || passAttempt !== 'overlook2021')) {
-    console.log('Login Failed!');
+    console.log('Login Failed!'); // ERROR HANDLING LATER ------------------------------------------
     return;
   } else {
     Promise.all([getData(`customers/${id}`)])
     .then(value => {
-      customer = new Customer(value[0], allRooms, allBookings);
+      customer = new Customer(value[0], allRooms);
       updateCustomerInfo();
     });
 
@@ -92,12 +98,13 @@ function getLogin(event) {
 };
 
 function updateCustomerInfo() {
+  customer.resetBookings(allBookings);
   customer.trackSpending();
   
-  updateCustomerDisplay();
+  updateCustomerDisplay('allCustomerBookings');
 };
 
-function updateCustomerDisplay() {
+function updateCustomerDisplay(updateWith) {
   const helloCustomer = document.querySelector('#hello-customer');
   const amountSpent = document.querySelector('#amount-spent');
 
@@ -105,7 +112,11 @@ function updateCustomerDisplay() {
   amountSpent.innerText = `$${customer.spent}`;
   customerBookings.innerHTML = '';
 
-  customer.bookings.forEach(booking => {
+  if (!customer[updateWith].length) {
+    customerBookings.innerHTML = '<h2 class="apology">WE ARE SO SORRY! YOU DIDN\'T BOOK THAT DAY 😭</h2>';
+  }
+
+  customer[updateWith].forEach(booking => {
     let bookingRoom = booking.getRoom();
 
     customerBookings.innerHTML += 
@@ -133,10 +144,15 @@ function switchPage(event) {
   };
 };
 
+function switchToNewBooking() {
+  profileButton.dataset.active = 'false';
+  newBookingsButton.dataset.active = 'true';
+  pageType.innerText = 'Book a Room';
+  show(newBooking);
+  hide(dashboard);
+};
+
 function switchToProfile() {
-  const profileButton = document.querySelector('#profile-button');
-  const newBookingsButton = document.querySelector('#new-bookings-button');
-  const pageType = document.querySelector('#page-type');
   profileButton.dataset.active = 'true';
   newBookingsButton.dataset.active = 'false';
   pageType.innerText = 'My Bookings';
@@ -144,15 +160,18 @@ function switchToProfile() {
   hide(newBooking);
 };
 
-function switchToNewBooking() {
-  const profileButton = document.querySelector('#profile-button');
-  const newBookingsButton = document.querySelector('#new-bookings-button');
-  const pageType = document.querySelector('#page-type');
-  profileButton.dataset.active = 'false';
-  newBookingsButton.dataset.active = 'true';
-  pageType.innerText = 'Book a Room';
-  show(newBooking);
-  hide(dashboard);
+function filterByDate(date) {
+  let splitDate = date.split('/');
+  let reformattedDate = `${splitDate[2]}/${splitDate[0]}/${splitDate[1]}`;
+  customer.selectDate(reformattedDate);
+  console.log(customer);
+  updateCustomerDisplay('filteredCustomerBookings');
+};
+
+function filterRooms(event) {
+  if (event.target.type === 'radio') {
+    console.log(event.target.id);
+  };
 };
 
 function resetSite() {
