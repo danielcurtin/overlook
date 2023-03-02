@@ -1,5 +1,4 @@
 import Booking from "./Booking";
-import { postBooking } from '../api-calls';
 
 class Room {
   constructor(roomObject) {
@@ -10,8 +9,8 @@ class Room {
     this.cost = roomObject.costPerNight;
   };
 
-  getNewBooking(customerID, selectedDate, allRooms) {
-    return new Booking({ id: '', userID: customerID, date: selectedDate, roomNumber: this.number}, allRooms)
+  getNewBooking(customerID, selectedDate) {
+    return new Booking({ id: '', userID: customerID, date: selectedDate, roomNumber: this.number})
   };
 };
 

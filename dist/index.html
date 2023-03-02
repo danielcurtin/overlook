@@ -32,30 +32,30 @@
   </section>
   <main class="actionPage hidden" id="action-page">
     <section class="userPage">
-      <nav class="sidebarNav">
+      <nav class="sidebarNav" id="side-nav">
         <div class="userProfilePic">
           <i class="fa-brands fa-github"></i>
         </div>
         <div class="dateInputContainer">
-          <label class="calendarInputLabel" for="calendar">Date of Stay</label>
+          <label class="calendarInputLabel" for="calendar">Pick a Date</label>
           <input type="text" class="calendarInput" id="calendar"></input>
         </div>
         <form class="filters">
           <h2 class="filterHead">Room Type</h2>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="single">
+            <input type="radio" name="room-type" id="single" data-filter="single room">
             <label for="single">Single</label>
           </div>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="suite">
+            <input type="radio" name="room-type" id="suite" data-filter="suite">
             <label for="suite">Suite</label>
           </div>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="junior">
+            <input type="radio" name="room-type" id="junior" data-filter="junior suite">
             <label for="junior">Junior Suite</label>
           </div>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="residential">
+            <input type="radio" name="room-type" id="residential" data-filter="residential suite">
             <label for="residential">Residential Suite</label>
           </div>
         </form>
@@ -65,20 +65,16 @@
         </button>
       </nav>
       <section class="mainUserActions">
-        <header class="navBanner">
-          <h3 class="helloCustomer" id="hello-customer">Hello, Customer!</h3>
+        <header class="navBanner" id="nav-banner">
+          <h3 class="helloCustomer">Hello, <span id="hello-customer">Customer</span>!</h3>
           <h3 class="pageType" id="page-type">My Bookings</h3>
           <div class="bannerButtonsContainer">
-            <button class="bannerButton roomsList" data-active="false">
-              <i class="fa-solid fa-bed"></i>
-            </button>
-            <button class="bannerButton userProfile" data-active="true">
-              <i class="fa-solid fa-user"></i>
-            </button>
+            <button class="bannerButton roomsList fa-solid fa-bed" data-active="false" data-value="new-bookings" id="new-bookings-button"></button>
+            <button class="bannerButton userProfile fa-solid fa-user" data-active="true" data-value="profile" id="profile-button"></button>
           </div>
         </header>
         <h2 class="windowText"><em>See you soon!</em></h2>
-        <section class="dashboardContainer">
+        <section class="dashboardContainer" id="dashboard-container">
           <section class="spentContainer">
             <h2 class="spentHead">Thank you for spending <span class="amountSpent" id="amount-spent">$123.45</span> with us!</h2>
           </section>
@@ -87,7 +83,7 @@
           </section>
         </section>
 
-        <section class="roomsContainer hidden">
+        <section class="roomsContainer hidden" id="new-booking">
           <article class="room">
             <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed">
             <div class="roomBottom">
