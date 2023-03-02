@@ -10,6 +10,7 @@ import './images/single room.jpg';
 
 // Classes
 import Customer from './classes/Customer';
+import Hotel from './classes/Hotel';
 import Room from './classes/Room';
 import Booking from './classes/Booking';
 
@@ -27,13 +28,14 @@ new AirDatepicker('#calendar', {
 // APIs
 import { getData } from './api-calls';
 
-let allCustomers, allRooms, allBookings, customer;
+let allCustomers, allRooms, allBookings, hotel, customer, dashPage;
 
 Promise.all([getData('customers'), getData('rooms'), getData('bookings')])
 .then(values => {
   allCustomers = values[0].customers;
   allRooms = values[1].rooms.map(room => new Room(room));
-  allBookings = values[2].bookings.map(booking => new Booking(booking, allRooms));
+  allBookings = values[2].bookings.map(booking => new Booking(booking));
+  hotel = new Hotel(allRooms, allBookings);
 });
 
 // Elements
@@ -59,7 +61,17 @@ const newBooking = document.querySelector('#new-booking');
 loginButton.addEventListener('click', getLogin);
 logOutButton.addEventListener('click', resetSite);
 navBanner.addEventListener('click', switchPage);
-sidebar.addEventListener('click', filterRooms);
+sidebar.addEventListener('click', event => {
+  if (event.target.type === 'radio') {
+    if (customer.selectedType === event.target.dataset.filter) {
+      event.target.checked = false;
+      customer.resetType();
+      customer.selectedDate ? filterByDate(customer.selectedDate) : updateCustomerDisplay('allCustomerBookings');
+    } else {
+      filterByType(event.target.dataset.filter);
+    };
+  };
+});
 
 
 function hide(element) {
@@ -85,12 +97,13 @@ function getLogin(event) {
   } else {
     Promise.all([getData(`customers/${id}`)])
     .then(value => {
-      customer = new Customer(value[0], allRooms);
+      customer = new Customer(value[0], hotel);
       updateCustomerInfo();
     });
 
     hide(loginPage);
     show(actionPage);
+    dashPage = true;
 
     usernameInput.value = '';
     passwordInput.value = '';
@@ -98,26 +111,32 @@ function getLogin(event) {
 };
 
 function updateCustomerInfo() {
+  const helloCustomer = document.querySelector('#hello-customer');
+
+  helloCustomer.innerText = `${customer.name.split(' ')[0]}`;
+
   customer.resetBookings(allBookings);
-  customer.trackSpending();
+  customer.trackSpending(allRooms);
   
   updateCustomerDisplay('allCustomerBookings');
 };
 
 function updateCustomerDisplay(updateWith) {
-  const helloCustomer = document.querySelector('#hello-customer');
   const amountSpent = document.querySelector('#amount-spent');
-
-  helloCustomer.innerText = `${customer.name.split(' ')[0]}`;
+  
   amountSpent.innerText = `$${customer.spent}`;
   customerBookings.innerHTML = '';
 
+  if (customer.selectedDate && customer.selectedType) {
+    updateWith = 'filteredBoth';
+  };
+
   if (!customer[updateWith].length) {
-    customerBookings.innerHTML = '<h2 class="apology">WE ARE SO SORRY! YOU DIDN\'T BOOK THAT DAY 😭</h2>';
+    customerBookings.innerHTML = '<h2 class="apology">WE ARE SO SORRY! NO BOOKINGS FOUND 😭</h2>';
   }
 
   customer[updateWith].forEach(booking => {
-    let bookingRoom = booking.getRoom();
+    let bookingRoom = customer.hotel.getRoomOfBooking(booking.roomNumber);
 
     customerBookings.innerHTML += 
     `
@@ -138,6 +157,10 @@ function updateCustomerDisplay(updateWith) {
   });
 };
 
+function updateNewBookingDisplay() {
+  
+};
+
 function switchPage(event) {
   if (event.target.dataset.active === 'false') {
     event.target.dataset.value === 'new-bookings' ? switchToNewBooking() : switchToProfile();
@@ -145,6 +168,7 @@ function switchPage(event) {
 };
 
 function switchToNewBooking() {
+  dashPage = false;
   profileButton.dataset.active = 'false';
   newBookingsButton.dataset.active = 'true';
   pageType.innerText = 'Book a Room';
@@ -153,6 +177,7 @@ function switchToNewBooking() {
 };
 
 function switchToProfile() {
+  dashPage = true;
   profileButton.dataset.active = 'true';
   newBookingsButton.dataset.active = 'false';
   pageType.innerText = 'My Bookings';
@@ -161,17 +186,40 @@ function switchToProfile() {
 };
 
 function filterByDate(date) {
-  let splitDate = date.split('/');
-  let reformattedDate = `${splitDate[2]}/${splitDate[0]}/${splitDate[1]}`;
-  customer.selectDate(reformattedDate);
-  console.log(customer);
-  updateCustomerDisplay('filteredCustomerBookings');
+
+  if (!date) {
+    if (dashPage) {
+      customer.resetDate();
+      customer.selectedType ? filterByType(customer.selectedType) : updateCustomerDisplay('allCustomerBookings');
+    } else {
+      updateNewBookingDisplay()
+    }
+    return;
+  };
+
+  if ((date[0] + date[1]) === '20') {
+    customer.selectDate(date);
+    updateCustomerDisplay('filteredByDate');
+    return;
+  };
+
+  const splitDate = date.split('/');
+  const reformattedDate = `${splitDate[2]}/${splitDate[0]}/${splitDate[1]}`;
+
+  if (dashPage) {
+    customer.selectDate(reformattedDate);
+    updateCustomerDisplay('filteredByDate');
+  } else {
+    // hotel.selectDateBookings(reformattedDate);
+    // display here
+  }
 };
 
-function filterRooms(event) {
-  if (event.target.type === 'radio') {
-    console.log(event.target.id);
-  };
+function filterByType(filter) {
+  if (dashPage) {
+    customer.selectType(filter);
+    updateCustomerDisplay('filteredByType');
+  }
 };
 
 function resetSite() {
