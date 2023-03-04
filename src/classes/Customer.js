@@ -1,53 +1,25 @@
+import Hotel from "./Hotel";
+
 class Customer {
-  constructor(customerObject, hotel) {
+  constructor(customerObject, allRooms, allBookings) {
     this.id = customerObject.id;
     this.name = customerObject.name;
-    this.hotel = hotel;
-    this.allCustomerBookings = [];
-    this.filteredByDate = [];
-    this.filteredByType = [];
-    this.filteredBoth = [];
+    this.hotel = new Hotel(allRooms, this.getBookings(allBookings));
     this.spent = 0;
-    this.selectedDate;
-    this.selectedType;
+  };
+
+  getBookings(allBookings) {
+    return allBookings.filter(booking => this.id === booking.userID);
   };
 
   trackSpending() {
-    this.spent = this.allCustomerBookings.reduce((acc, booking) => {
+    this.spent = this.hotel.bookings.reduce((acc, booking) => {
       return acc += this.hotel.allRooms.find(room => booking.roomNumber === room.number).cost;
     }, 0);
   };
 
-  selectType(filter) {
-    this.selectedType = filter;
-
-    !this.selectedDate ? this.filteredByType = this.allCustomerBookings.filter(booking => this.hotel.allRooms.find(room => booking.roomNumber === room.number).type === filter) : this.filterBoth();
-  };
-
-  selectDate(date) {
-    this.selectedDate = date;
-
-    !this.selectedType ? this.filteredByDate = this.allCustomerBookings.filter(booking => booking.date === date) : this.filterBoth();
-  };
-
-  filterBoth() {
-    this.filteredBoth = this.allCustomerBookings.filter(booking => booking.date === this.selectedDate).filter(booking => this.hotel.allRooms.find(room => booking.roomNumber === room.number).type === this.selectedType);
-  };
-
-  resetBookings() {
-    this.allCustomerBookings = this.hotel.allBookings.filter(booking => this.id === booking.userID);
-  };
-
-  resetDate() {
-    this.selectedDate = undefined;
-  };
-
-  resetType() {
-    this.selectedType = undefined;
-  };
-
   saveBooking(room) {
-    this.allCustomerBookings.push(room.getNewBooking(this.id, this.selectedDate));
+    this.hotel.bookings.push(room.getNewBooking(this.id, this.hotel.selectedDate));
   };
 };
 
