@@ -28,6 +28,22 @@ class Hotel {
     !this.selectedType ? this.filteredByDate = this.bookings.filter(booking => booking.date === date) : this.filterBoth();
   };
 
+  roomFilterType(type) {
+    this.selectedType = type;
+
+    !this.selectedDate ? this.filteredByType = this.allRooms.filter(room => room.type === type) : this.roomFilterBoth();
+  };
+
+  roomFilterDate(date) {
+    this.selectedDate = date;
+
+    !this.selectedType ? this.filteredByDate = this.allRooms.filter(room => !this.bookings.filter(booking => booking.date === date).some(booking => booking.roomNumber === room.number)) : this.roomFilterBoth();
+  };
+
+  roomFilterBoth() {
+    this.filteredBoth = this.allRooms.filter(room => room.type === this.selectedType).filter(room => !this.bookings.filter(booking => booking.date === this.selectedDate).some(booking => booking.roomNumber === room.number));
+  };
+
   filterBoth() {
     this.filteredBoth = this.bookings.filter(booking => booking.date === this.selectedDate).filter(booking => this.allRooms.find(room => booking.roomNumber === room.number).type === this.selectedType);
   };
@@ -39,6 +55,11 @@ class Hotel {
   resetType() {
     this.selectedType = undefined;
   };
+
+  resetBoth() {
+    this.selectedDate = undefined;
+    this.selectedType = undefined;
+  }
 };
 
 export default Hotel;
