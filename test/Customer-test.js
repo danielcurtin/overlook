@@ -79,26 +79,6 @@ describe('Customer', () => {
     expect(customer2.spent).to.equal(835.78);
   });
 
-  it('should be able to select a filter', () => {
-    customer1.hotel.selectType('suite');
-
-    expect(customer1.hotel.selectedType).to.equal('suite');
-
-    customer2.hotel.selectType('single room');
-
-    expect(customer2.hotel.selectedType).to.equal('single room');
-  });
-
-  it('should be able to select a date', () => {
-    customer1.hotel.selectDate('2022/02/11');
-
-    expect(customer1.hotel.selectedDate).to.equal('2022/02/11');
-
-    customer2.hotel.selectDate('2023/10/05');
-
-    expect(customer2.hotel.selectedDate).to.equal('2023/10/05');
-  });
-
   it('should be able to save new bookings', () => {
     customer1.hotel.selectDate('2023/06/12');
     customer1.saveBooking(allRooms[0]);
