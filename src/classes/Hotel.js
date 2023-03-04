@@ -2,8 +2,8 @@ class Hotel {
   constructor(allRooms, allBookings) {
     this.allRooms = allRooms;
     this.allBookings = allBookings;
-    this.filteredBookingsType = [];
-    this.filteredBookingsDate = [];
+    this.filteredByDate = [];
+    this.filteredByType = [];
     this.filteredBoth = [];
   };
 
