@@ -261,7 +261,7 @@ button,
   display: flex;
   align-items: center;
   justify-content: center;  
-  height: 30%;
+  height: 25%;
   width: 95%;
   text-align: center;
 }
@@ -279,7 +279,7 @@ button,
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  height: 70%;
+  height: 65%;
   width: 100%;
   background: white;
 }
