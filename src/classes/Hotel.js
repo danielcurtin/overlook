@@ -1,3 +1,5 @@
+import Booking from "./Booking";
+
 class Hotel {
   constructor(allRooms, allBookings) {
     this.allRooms = allRooms;
@@ -59,7 +61,11 @@ class Hotel {
   resetBoth() {
     this.selectedDate = undefined;
     this.selectedType = undefined;
-  }
+  };
+
+  saveBooking(newBooking) {
+    this.bookings.unshift(new Booking(newBooking));
+  };
 };
 
 export default Hotel;

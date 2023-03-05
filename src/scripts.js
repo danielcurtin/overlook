@@ -26,7 +26,7 @@ new AirDatepicker('#calendar', {
 });
 
 // APIs
-import { getData } from './api-calls';
+import { getData, postBooking } from './api-calls';
 
 let allCustomers, allRooms, allBookings, hotel, customer, dashPage;
 
@@ -55,12 +55,12 @@ const pageType = document.querySelector('#page-type');
 const logOutButton = document.querySelector('#log-out');
 
 const customerBookingsDisplay = document.querySelector('#customer-bookings');
+const dashboard = document.querySelector('#dashboard-container');
+
 const newBookingsDisplay = document.querySelector('#rooms-container');
 const newBookingHeader = document.querySelector('#rooms-header-date');
 const roomsContainer = document.querySelector('#new-bookings');
 
-const dashboard = document.querySelector('#dashboard-container');
-const newBooking = document.querySelector('#new-booking');
 
 
 loginButton.addEventListener('click', getLogin);
@@ -75,7 +75,18 @@ calendarInput.addEventListener('keydown', event => {
   if (event.code === 'Enter') {
     isValidDate(calendarInput.value) ? filterByDate(calendarInput.value) : warnInvalidDate()
   };
-})
+});
+roomsContainer.addEventListener('click', event => {
+  if (event.target.classList.contains('bookRoomBtn')) {
+    if (!hotel.selectedDate) {
+      newBookingHeader.innerHTML = 'Error Booking- No date selected. Please select a date.';
+      return;
+    };
+    saveBooking(event);
+    replaceButton(event);
+  };
+});
+
 
 function hide(element) {
   element.classList.add('hidden');
@@ -162,7 +173,8 @@ function updateCustomerDisplay(updateWith) {
 };
 
 function updateNewBookingDisplay(updateWith) {
-  newBookingHeader.innerText = hotel.selectedDate || 'Today';
+
+  newBookingHeader.innerText = hotel.selectedDate ? `Showing Rooms Available for: ${hotel.selectedDate}` : 'Please Select A Date';
   roomsContainer.innerHTML = '';
 
   if (hotel.selectedDate && hotel.selectedType) {
@@ -183,7 +195,7 @@ function updateNewBookingDisplay(updateWith) {
           <h2 class="roomType">${room.type}</h2>
           <h3 class="sizeAndCount">${room.numBeds} ${room.bed}</h3>
         </header>
-        <button class="bookRoomBtn">Book</button>
+        <button class="bookRoomBtn" data-room-num="${room.number}">Book</button>
       </div>
     </article>
     `;
@@ -318,4 +330,20 @@ function resetSite() {
   switchPage();
   show(loginPage);
   hide(actionPage);
+};
+
+function saveBooking(event) {
+  const selectedRoom = allRooms.find(room => parseInt(event.target.dataset.roomNum) === room.number);
+
+  Promise.all([postBooking(customer.id, hotel.selectedDate, selectedRoom.number)])
+  .then(value => {
+    customer.hotel.saveBooking(value[0].newBooking);
+    hotel.saveBooking(value[0].newBooking);
+  });
+};
+
+function replaceButton(event) {
+  event.target.classList.remove('bookRoomBtn');
+  event.target.classList.add('afterBookingStyling');
+  event.target.innerText = 'Booked!';
 };
