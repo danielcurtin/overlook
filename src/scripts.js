@@ -191,6 +191,13 @@ function updateNewBookingDisplay(updateWith) {
 };
 
 function switchPage(event) {
+  const filterRadios = document.querySelectorAll('.filter');
+
+  calendarInput.value = '';
+  filterRadios.forEach(radio => radio.checked = false);
+  customer.hotel.resetBoth();
+  hotel.resetBoth();
+
   if (event.target.dataset.active === 'false') {
     event.target.dataset.value === 'new-bookings' ? switchToNewBooking() : switchToProfile();
   };
@@ -308,6 +315,7 @@ function warnInvalidDate() {
 };
 
 function resetSite() {
+  switchPage();
   show(loginPage);
   hide(actionPage);
 };

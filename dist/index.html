@@ -24,8 +24,7 @@
         </div>
         <div class="labelAndInputContainer">
           <label for="passwordInput"><em>Password</em></label>
-          <input type="text" id="password-input" required> 
-          <!-- make this^ type="password" for password censoring later -->
+          <input type="password" id="password-input" required> 
         </div>
         <input type="submit" value="Login" class="submitLoginInfo" id="submit-login">
       </form>
@@ -44,19 +43,19 @@
         <form class="filters">
           <h2 class="filterHead">Room Type</h2>
           <div class="filterItem">
-            <input type="radio" name="room-type" id="single" data-filter="single room">
+            <input class="filter" type="radio" name="room-type" id="single" data-filter="single room">
             <label for="single">Single</label>
           </div>
           <div class="filterItem">
-            <input type="radio" name="room-type" id="suite" data-filter="suite">
+            <input class="filter" type="radio" name="room-type" id="suite" data-filter="suite">
             <label for="suite">Suite</label>
           </div>
           <div class="filterItem">
-            <input type="radio" name="room-type" id="junior" data-filter="junior suite">
+            <input class="filter" type="radio" name="room-type" id="junior" data-filter="junior suite">
             <label for="junior">Junior Suite</label>
           </div>
           <div class="filterItem">
-            <input type="radio" name="room-type" id="residential" data-filter="residential suite">
+            <input class="filter" type="radio" name="room-type" id="residential" data-filter="residential suite">
             <label for="residential">Residential Suite</label>
           </div>
         </form>
