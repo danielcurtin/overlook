@@ -46,6 +46,7 @@ const passwordInput = document.querySelector('#password-input');
 
 const actionPage = document.querySelector('#action-page');
 const sidebar = document.querySelector('#side-nav');
+const calendarInput = document.querySelector('#calendar');
 const navBanner = document.querySelector('#nav-banner');
 const profileButton = document.querySelector('#profile-button');
 const newBookingsButton = document.querySelector('#new-bookings-button');
@@ -54,6 +55,7 @@ const logOutButton = document.querySelector('#log-out');
 
 const customerBookingsDisplay = document.querySelector('#customer-bookings');
 const newBookingsDisplay = document.querySelector('#rooms-container');
+const newBookingHeader = document.querySelector('#rooms-header-date');
 const roomsContainer = document.querySelector('#new-bookings');
 
 const dashboard = document.querySelector('#dashboard-container');
@@ -68,7 +70,11 @@ sidebar.addEventListener('click', event => {
     dashPage ? toggleProfileFilter(event) : toggleNewBookingFilter(event);
   };
 });
-
+calendarInput.addEventListener('keydown', event => {
+  if (event.code === 'Enter') {
+    isValidDate(calendarInput.value) ? filterByDate(calendarInput.value) : warnInvalidDate()
+  };
+})
 
 function hide(element) {
   element.classList.add('hidden');
@@ -154,8 +160,6 @@ function updateCustomerDisplay(updateWith) {
 };
 
 function updateNewBookingDisplay(updateWith) {
-  const newBookingHeader = document.querySelector('#rooms-header-date');
-
   newBookingHeader.innerText = hotel.selectedDate || 'Today';
   roomsContainer.innerHTML = '';
 
@@ -276,6 +280,29 @@ function filterByType(filter) {
     hotel.roomFilterType(filter);
     updateNewBookingDisplay('filteredByType');
   };
+};
+
+function isValidDate(date) {
+  let newDate = date.split('/');
+  if (newDate[0].length !== 2 || newDate[1].length !== 2 || newDate[2].length !== 4) {
+    return false;
+  };
+
+  if (parseInt(newDate[0]) < 1 || parseInt(newDate[0]) > 12) {
+    return false;
+  } else if (parseInt(newDate[1]) < 1 || parseInt(newDate[1]) > 31) {
+    return false;
+  } else if (parseInt(newDate[2]) < 2000 || parseInt(newDate[2]) > 2999) {
+    return false;
+  } else {
+    return true;
+  };
+};
+
+function warnInvalidDate() {
+  calendarInput.value = '';
+
+  !dashPage ? newBookingHeader.innerText = 'Invalid Date, Please try again.' : null;
 };
 
 function resetSite() {
