@@ -8,10 +8,6 @@ class Room {
     this.numBeds = roomObject.numBeds;
     this.cost = roomObject.costPerNight;
   };
-
-  getNewBooking(customerID, selectedDate) {
-    return new Booking({ id: '', userID: customerID, date: selectedDate, roomNumber: this.number})
-  };
 };
 
 export default Room;

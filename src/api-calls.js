@@ -5,7 +5,7 @@ function getData(type) {
 };
 
 function postBooking(userID, date, roomNumber) {
-  fetch(`http://localhost:3001/api/v1/bookings`, {
+  return fetch(`http://localhost:3001/api/v1/bookings`, {
     method: 'POST',
     body: JSON.stringify({
       "userID": userID, 
@@ -17,7 +17,6 @@ function postBooking(userID, date, roomNumber) {
     }
   })
   .then(res => res.json())
-  .then(data => console.log(data))
   .catch(err => console.log(err));
 };
 
