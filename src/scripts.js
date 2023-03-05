@@ -53,7 +53,8 @@ const pageType = document.querySelector('#page-type');
 const logOutButton = document.querySelector('#log-out');
 
 const customerBookingsDisplay = document.querySelector('#customer-bookings');
-const newBookingsDisplay = document.querySelector('#new-bookings');
+const newBookingsDisplay = document.querySelector('#rooms-container');
+const roomsContainer = document.querySelector('#new-bookings');
 
 const dashboard = document.querySelector('#dashboard-container');
 const newBooking = document.querySelector('#new-booking');
@@ -153,22 +154,21 @@ function updateCustomerDisplay(updateWith) {
 };
 
 function updateNewBookingDisplay(updateWith) {
+  const newBookingHeader = document.querySelector('#rooms-header-date');
 
-  newBookingsDisplay.innerHTML = '';
+  newBookingHeader.innerText = hotel.selectedDate || 'Today';
+  roomsContainer.innerHTML = '';
 
-  console.log(updateWith);
-
-  console.log(hotel.selectedDate, hotel.selectedType)
   if (hotel.selectedDate && hotel.selectedType) {
     updateWith = 'filteredBoth';
   };
 
   if (!hotel[updateWith].length) {
-    newBookingsDisplay.innerHTML = '<h2 class="apology">WE ARE SO SORRY! NO RESULTS</h2>';
+    roomsContainer.innerHTML = '<h2 class="apology">WE ARE SO SORRY! NO RESULTS</h2>';
   };
 
   hotel[updateWith].forEach(room => {
-    newBookingsDisplay.innerHTML +=
+    roomsContainer.innerHTML +=
     `
     <article class="room">
       <img src="./images/${room.type}.jpg" alt="Picture of ${room.type}">

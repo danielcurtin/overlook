@@ -243,7 +243,7 @@ button,
   overflow-wrap: normal;
 }
 
-.roomsContainer,
+.availableRoomsContainer,
 .customerBookings {
   display: flex;
   align-items: center;
@@ -254,6 +254,16 @@ button,
   width: 100%;
   background: white;
   overflow-y: scroll;
+}
+
+.availableRoomsContainer {
+  height: 92%;
+}
+
+.roomsContainerHeader {
+  text-align: left;
+  width: 95%;
+  height: 6%;
 }
 
 .spentContainer {
@@ -274,7 +284,8 @@ button,
   font-size: calc(var(--spent-msg-font) * 1.5);
 }
 
-.dashboardContainer {
+.dashboardContainer,
+.roomsContainer {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -308,6 +319,7 @@ button,
 .roomInfo > *,
 .bookedDate > *,
 .logOut > *,
+.roomsContainerHeader,
 .spentHead  {
   margin: 0;
   padding: 0;

@@ -69,8 +69,8 @@
           <h3 class="helloCustomer">Hello, <span id="hello-customer">Customer</span>!</h3>
           <h3 class="pageType" id="page-type">My Bookings</h3>
           <div class="bannerButtonsContainer">
-            <button class="bannerButton roomsList fa-solid fa-bed" data-active="false" data-value="new-bookings" id="new-bookings-button"></button>
-            <button class="bannerButton userProfile fa-solid fa-user" data-active="true" data-value="profile" id="profile-button"></button>
+            <button aria-label="View Rooms Button" class="bannerButton roomsList fa-solid fa-bed" data-active="false" data-value="new-bookings" id="new-bookings-button"></button>
+            <button aria-label="My Profile Button" class="bannerButton userProfile fa-solid fa-user" data-active="true" data-value="profile" id="profile-button"></button>
           </div>
         </header>
         <h2 class="windowText"><em>See you soon!</em></h2>
@@ -83,51 +83,11 @@
           </section>
         </section>
 
-        <section class="roomsContainer hidden" id="new-bookings">
-          <article class="room">
-            <img src="./images/residential suite.jpg" alt="white and blue striped pillows on white bed with blue blanket laying at the foot of the bed">
-            <div class="roomBottom">
-              <header class="roomInfo">
-                <h2 class="roomType">Residential Suite</h2>
-                <h3 class="sizeAndCount">1 Queen</h3>
-              </header>
-              <button class="bookRoomBtn">Book</button>
-            </div>
-          </article>
-
-          <article class="room">
-            <img src="./images/suite.jpg" alt="white bed linen on bed">
-            <div class="roomBottom">
-              <header class="roomInfo">
-                <h2 class="roomType">Suite</h2>
-                <h3 class="sizeAndCount">1 King</h3>
-              </header>
-              <button class="bookRoomBtn">Book</button>
-            </div>
-          </article>
-
-          <article class="room">
-            <img src="./images/single room.jpg" alt="two red pillows and grey and white floral bedspread">
-            <div class="roomBottom">
-              <header class="roomInfo">
-                <h2 class="roomType">Suite</h2>
-                <h3 class="sizeAndCount">2 Full</h3>
-              </header>
-              <button class="bookRoomBtn">Book</button>
-            </div>
-          </article>
-
-          <article class="room">
-            <img src="./images/junior suite.jpg" alt="black and white uplight chandelier turned on near brown sofa">
-            <div class="roomBottom">
-              <header class="roomInfo">
-                <h2 class="roomType">Suite</h2>
-                <h3 class="sizeAndCount">2 Twin</h3>
-              </header>
-              <button class="bookRoomBtn">Book</button>
-            </div>
-          </article>
-
+        <section class="roomsContainer hidden" id="rooms-container">
+          <h2 class="roomsContainerHeader">Showing Rooms Available: <span class="datePicked" id="rooms-header-date">Today</span></h2>
+          <section class="availableRoomsContainer" id="new-bookings">
+            <!-- available rooms get added here -->
+          </section>
         </section>
       </section>
     </section>
