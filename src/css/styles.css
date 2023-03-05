@@ -60,6 +60,13 @@ button,
   background: white;
   box-shadow: 0px 0px 15px white;
   border-radius: 25px;
+  position: relative;
+}
+
+.badLogin {
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
 .login {

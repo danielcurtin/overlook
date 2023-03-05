@@ -43,6 +43,7 @@ const loginPage = document.querySelector('#login-page');
 const loginButton = document.querySelector('#submit-login');
 const usernameInput = document.querySelector('#username-input');
 const passwordInput = document.querySelector('#password-input');
+const badLogin = document.querySelector('#bad-login');
 
 const actionPage = document.querySelector('#action-page');
 const sidebar = document.querySelector('#side-nav');
@@ -94,7 +95,7 @@ function getLogin(event) {
 
 
   if ((parseInt(id) < 1 || parseInt(id) > 50) || (userAttempt !== `customer${id}` || passAttempt !== 'overlook2021')) {
-    console.log('Login Failed!'); // ERROR HANDLING LATER ------------------------------------------
+    badLogin.classList.remove('hidden');
     return;
   } else {
     Promise.all([getData(`customers/${id}`)])
@@ -103,6 +104,7 @@ function getLogin(event) {
       updateCustomerInfo();
     });
 
+    badLogin.classList.add('hidden');
     hide(loginPage);
     show(actionPage);
     dashPage = true;
