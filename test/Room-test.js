@@ -1,6 +1,5 @@
 import { rooms } from './test-data';
 import Room from '../src/classes/Room';
-import Booking from '../src/classes/Booking';
 import chai from 'chai';
 const expect = chai.expect;
 

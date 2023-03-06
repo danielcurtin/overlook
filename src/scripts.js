@@ -28,11 +28,10 @@ new AirDatepicker('#calendar', {
 // APIs
 import { getData, postBooking } from './api-calls';
 
-let allCustomers, allRooms, allBookings, hotel, customer, dashPage;
+let allRooms, allBookings, hotel, customer, dashPage;
 
 Promise.all([getData('customers'), getData('rooms'), getData('bookings')])
 .then(values => {
-  allCustomers = values[0].customers;
   allRooms = values[1].rooms.map(room => new Room(room));
   allBookings = values[2].bookings.map(booking => new Booking(booking));
   hotel = new Hotel(allRooms, allBookings);
@@ -62,7 +61,7 @@ const newBookingHeader = document.querySelector('#rooms-header-date');
 const roomsContainer = document.querySelector('#new-bookings');
 
 
-
+// Event Listeners
 loginButton.addEventListener('click', getLogin);
 logOutButton.addEventListener('click', resetSite);
 navBanner.addEventListener('click', switchPage);
@@ -89,6 +88,7 @@ roomsContainer.addEventListener('click', event => {
 });
 
 
+// Functions
 function hide(element) {
   element.classList.add('hidden');
 };
@@ -257,7 +257,7 @@ function toggleNewBookingFilter(event) {
   } else {
     filterByType(event.target.dataset.filter);
     resetOtherBoxes(event.target.id);
-  }
+  };
 };
 
 function filterByDate(date) {
@@ -293,7 +293,7 @@ function filterByDate(date) {
   } else {
     hotel.roomFilterDate(reformattedDate);
     updateNewBookingDisplay('filteredByDate');
-  }
+  };
 };
 
 function filterByType(filter) {
@@ -342,6 +342,9 @@ function saveBooking(event) {
   .then(value => {
     customer.hotel.saveBooking(value[0].newBooking);
     hotel.saveBooking(value[0].newBooking);
+  })
+  .catch(() => {
+    newBookingHeader.innerText = 'Server Error. Please Try Again Later.';
   });
 };
 

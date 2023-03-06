@@ -36,6 +36,7 @@ describe('Hotel', () => {
 
   it('should be able to select a type to filter by', () => {
     allBookings[0].roomNumber = 1;
+    allBookings[1].roomNumber = 2;
 
     hotel = new Hotel(allRooms, allBookings);
 
@@ -64,8 +65,10 @@ describe('Hotel', () => {
     allBookings[0].roomNumber = 1;
     allBookings[0].date = '2022/02/11';
 
-    hotel.selectType('residential suite');
-    hotel.selectDate('2022/02/11');
+    hotel.selectedType = 'residential suite';
+    hotel.selectedDate = '2022/02/11';
+
+    hotel.filterBoth();
 
     expect(hotel.filteredBoth).to.be.an('array');
     expect(hotel.filteredBoth.length).to.equal(1);
