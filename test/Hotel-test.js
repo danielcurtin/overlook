@@ -82,4 +82,11 @@ describe('Hotel', () => {
     expect(hotel.selectedDate).to.equal(undefined);
     expect(hotel.selectedType).to.equal(undefined);
   });
+
+  it('should be able to save new bookings', () => {
+    hotel.selectDate('2023/06/12');
+    hotel.saveBooking(allRooms[0]);
+
+    expect(hotel.bookings[0]).to.be.an.instanceOf(Booking);
+  });
 });

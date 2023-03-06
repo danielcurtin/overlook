@@ -78,11 +78,4 @@ describe('Customer', () => {
 
     expect(customer2.spent).to.equal(835.78);
   });
-
-  it('should be able to save new bookings', () => {
-    customer1.hotel.selectDate('2023/06/12');
-    customer1.saveBooking(allRooms[0]);
-
-    expect(customer1.hotel.bookings[0]).to.be.an.instanceOf(Booking);
-  });
 });

@@ -30,10 +30,4 @@ describe('Room', () => {
     expect(room2.type).to.equal('suite');
     expect(room2.cost).to.equal(477.38);
   });
-
-  it('should be able to return new Bookings of the current room', () => {
-    expect(room1.getNewBooking(1, '2023/11/17')).to.be.an.instanceOf(Booking);
-
-    expect(room2.getNewBooking(2, '2022/05/02')).to.be.an.instanceOf(Booking);
-  });
 });
