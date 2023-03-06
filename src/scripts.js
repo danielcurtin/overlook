@@ -131,7 +131,8 @@ function updateCustomerInfo() {
 
   helloCustomer.innerText = `${customer.name.split(' ')[0]}`;
 
-  customer.hotel.resetBoth();
+  customer.hotel.reset('selectedDate');
+  customer.hotel.reset('selectedType');
   customer.trackSpending();
   
   updateCustomerDisplay('bookings');
@@ -208,8 +209,10 @@ function switchPage(event) {
 
   calendarInput.value = '';
   filterRadios.forEach(radio => radio.checked = false);
-  customer.hotel.resetBoth();
-  hotel.resetBoth();
+  customer.hotel.reset('selectedDate');
+  customer.hotel.reset('selectedType');
+  hotel.reset('selectedDate');
+  hotel.reset('selectedType');
 
   if (event.target.dataset.active === 'false') {
     event.target.dataset.value === 'new-bookings' ? switchToNewBooking() : switchToProfile();
@@ -241,7 +244,7 @@ function switchToProfile() {
 function toggleProfileFilter(event) {
   if (customer.hotel.selectedType === event.target.dataset.filter) {
     event.target.checked = false;
-    customer.hotel.resetType();
+    customer.hotel.reset('selectedType');
     customer.hotel.selectedDate ? filterByDate(customer.hotel.selectedDate) : updateCustomerDisplay('bookings');
   } else {
     filterByType(event.target.dataset.filter);
@@ -252,7 +255,7 @@ function toggleProfileFilter(event) {
 function toggleNewBookingFilter(event) {
   if (hotel.selectedType === event.target.dataset.filter) {
     event.target.checked = false;
-    hotel.resetType();
+    hotel.reset('selectedType');
     hotel.selectedDate ? filterByDate(hotel.selectedDate) : updateNewBookingDisplay('allRooms');
   } else {
     filterByType(event.target.dataset.filter);
@@ -263,10 +266,10 @@ function toggleNewBookingFilter(event) {
 function filterByDate(date) {
   if (!date) {
     if (dashPage) {
-      customer.hotel.resetDate();
+      customer.hotel.reset('selectedDate');
       customer.hotel.selectedType ? filterByType(customer.hotel.selectedType) : updateCustomerDisplay('bookings');
     } else {
-      hotel.resetDate();
+      hotel.reset('selectedDate');
       hotel.selectedType ? filterByType(hotel.selectedType) : updateNewBookingDisplay('allRooms');
     };
     return;

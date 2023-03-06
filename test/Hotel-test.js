@@ -79,8 +79,8 @@ describe('Hotel', () => {
     hotel.selectedType = 'suite';
     hotel.selectedDate = '2023/01/01';
 
-    hotel.resetDate();
-    hotel.resetType();
+    hotel.reset('selectedDate');
+    hotel.reset('selectedType');
 
     expect(hotel.selectedDate).to.equal(undefined);
     expect(hotel.selectedType).to.equal(undefined);

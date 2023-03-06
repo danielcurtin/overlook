@@ -48,17 +48,8 @@ class Hotel {
     this.filteredBoth = this.allRooms.filter(room => room.type === this.selectedType).filter(room => !this.bookings.filter(booking => booking.date === this.selectedDate).some(booking => booking.roomNumber === room.number));
   };
 
-  resetDate() {
-    this.selectedDate = undefined;
-  };
-
-  resetType() {
-    this.selectedType = undefined;
-  };
-
-  resetBoth() {
-    this.selectedDate = undefined;
-    this.selectedType = undefined;
+  reset(toReset) {
+    this[toReset] = undefined;
   };
 
   saveBooking(newBooking) {
