@@ -43,19 +43,19 @@
         <form class="filters">
           <h2 class="filterHead">Room Type</h2>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="single" data-filter="single room">
+            <input class="filter" type="checkbox" name="room-type" id="single" data-filter="single room">
             <label for="single">Single</label>
           </div>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="suite" data-filter="suite">
+            <input class="filter" type="checkbox" name="room-type" id="suite" data-filter="suite">
             <label for="suite">Suite</label>
           </div>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="junior" data-filter="junior suite">
+            <input class="filter" type="checkbox" name="room-type" id="junior" data-filter="junior suite">
             <label for="junior">Junior Suite</label>
           </div>
           <div class="filterItem">
-            <input class="filter" type="radio" name="room-type" id="residential" data-filter="residential suite">
+            <input class="filter" type="checkbox" name="room-type" id="residential" data-filter="residential suite">
             <label for="residential">Residential Suite</label>
           </div>
         </form>
@@ -76,15 +76,15 @@
         <h2 class="windowText"><em>See you soon!</em></h2>
         <section class="dashboardContainer" id="dashboard-container">
           <section class="spentContainer">
-            <h2 class="spentHead">Thank you for spending <span class="amountSpent" id="amount-spent">$123.45</span> with us!</h2>
+            <h2 class="spentHead" tabindex="0">Thank you for spending <span class="amountSpent" id="amount-spent">$123.45</span> with us!</h2>
           </section>
-          <section class="customerBookings" id="customer-bookings">
+          <section class="customerBookings" id="customer-bookings" tabindex="0">
             <!-- Customer bookings get added here -->
           </section>
         </section>
 
         <section class="roomsContainer hidden" id="rooms-container">
-          <h2 class="roomsContainerHeader" id="rooms-header-date">Showing Rooms Available: Please Select a Date</h2>
+          <h2 class="roomsContainerHeader" id="rooms-header-date" tabindex="0">Showing Rooms Available: Please Select a Date</h2>
           <section class="availableRoomsContainer" id="new-bookings">
             <!-- available rooms get added here -->
           </section>

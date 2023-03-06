@@ -67,7 +67,7 @@ loginButton.addEventListener('click', getLogin);
 logOutButton.addEventListener('click', resetSite);
 navBanner.addEventListener('click', switchPage);
 sidebar.addEventListener('click', event => {
-  if (event.target.type === 'radio') {
+  if (event.target.type === 'checkbox') {
     dashPage ? toggleProfileFilter(event) : toggleNewBookingFilter(event);
   };
 });
@@ -80,6 +80,7 @@ roomsContainer.addEventListener('click', event => {
   if (event.target.classList.contains('bookRoomBtn')) {
     if (!hotel.selectedDate) {
       newBookingHeader.innerHTML = 'Error Booking- No date selected. Please select a date.';
+      calendarInput.focus();
       return;
     };
     saveBooking(event);
@@ -155,7 +156,7 @@ function updateCustomerDisplay(updateWith) {
 
     customerBookingsDisplay.innerHTML += 
     `
-    <article class="room">
+    <article class="room" tabindex="0">
       <img src="./images/${bookingRoom.type}.jpg" alt="Picture of ${bookingRoom.type}">
       <div class="roomBottom">
         <header class="roomInfo">
@@ -188,14 +189,14 @@ function updateNewBookingDisplay(updateWith) {
   hotel[updateWith].forEach(room => {
     roomsContainer.innerHTML +=
     `
-    <article class="room">
+    <article class="room" tabindex="0">
       <img src="./images/${room.type}.jpg" alt="Picture of ${room.type}">
       <div class="roomBottom">
         <header class="roomInfo">
           <h2 class="roomType">${room.type}</h2>
           <h3 class="sizeAndCount">${room.numBeds} ${room.bed}</h3>
         </header>
-        <button class="bookRoomBtn" data-room-num="${room.number}">Book</button>
+        <button class="bookRoomBtn" tabindex="0" data-room-num="${room.number}">Book</button>
       </div>
     </article>
     `;
@@ -244,6 +245,7 @@ function toggleProfileFilter(event) {
     customer.hotel.selectedDate ? filterByDate(customer.hotel.selectedDate) : updateCustomerDisplay('bookings');
   } else {
     filterByType(event.target.dataset.filter);
+    resetOtherBoxes(event.target.id);
   };
 };
 
@@ -254,6 +256,7 @@ function toggleNewBookingFilter(event) {
     hotel.selectedDate ? filterByDate(hotel.selectedDate) : updateNewBookingDisplay('allRooms');
   } else {
     filterByType(event.target.dataset.filter);
+    resetOtherBoxes(event.target.id);
   }
 };
 
@@ -339,6 +342,16 @@ function saveBooking(event) {
   .then(value => {
     customer.hotel.saveBooking(value[0].newBooking);
     hotel.saveBooking(value[0].newBooking);
+  });
+};
+
+function resetOtherBoxes(id) {
+  const filterBoxes = document.querySelectorAll('.filter');
+
+  filterBoxes.forEach(filter => {
+    if (filter.id !== id) {
+      filter.checked = false;
+    };
   });
 };
 
