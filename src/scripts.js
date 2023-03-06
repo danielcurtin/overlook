@@ -353,7 +353,7 @@ function saveBooking(event) {
   })
   .catch((err) => {
     newBookingHeader.style.color = 'red';
-    newBookingHeader.innerText = `#{err}. Please Try Again Later.`;
+    newBookingHeader.innerText = `${err}. Please Try Again Later.`;
   });
 };
 
