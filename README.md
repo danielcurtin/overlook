@@ -12,9 +12,10 @@ Install the library dependencies by running:
 
 ```bash
 npm install
+npm start
 ```
 
-Then run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see the Overlook login page.
+Go to `http://localhost:8080/` and you should see the Overlook login page.
 
 ## Login Credentials
 
