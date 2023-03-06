@@ -25,19 +25,6 @@ new AirDatepicker('#calendar', {
   onSelect: object => filterByDate(object.formattedDate)
 });
 
-// APIs
-import { getData, postBooking } from './api-calls';
-
-let allCustomers, allRooms, allBookings, hotel, customer, dashPage;
-
-Promise.all([getData('customers'), getData('rooms'), getData('bookings')])
-.then(values => {
-  allCustomers = values[0].customers;
-  allRooms = values[1].rooms.map(room => new Room(room));
-  allBookings = values[2].bookings.map(booking => new Booking(booking));
-  hotel = new Hotel(allRooms, allBookings);
-});
-
 // Elements
 const loginPage = document.querySelector('#login-page');
 const loginButton = document.querySelector('#submit-login');
@@ -61,8 +48,24 @@ const newBookingsDisplay = document.querySelector('#rooms-container');
 const newBookingHeader = document.querySelector('#rooms-header-date');
 const roomsContainer = document.querySelector('#new-bookings');
 
+// APIs
+import { getData, postBooking } from './api-calls';
+
+let allRooms, allBookings, hotel, customer, dashPage;
+
+Promise.all([getData('customers'), getData('rooms'), getData('bookings')])
+.then(values => {
+  allRooms = values[1].rooms.map(room => new Room(room));
+  allBookings = values[2].bookings.map(booking => new Booking(booking));
+  hotel = new Hotel(allRooms, allBookings);
+})
+.catch(() => {
+  badLogin.classList.remove('hidden');
+  badLogin.innerText = 'Server Error. Please refresh and try again.';
+});
 
 
+// Event Listeners
 loginButton.addEventListener('click', getLogin);
 logOutButton.addEventListener('click', resetSite);
 navBanner.addEventListener('click', switchPage);
@@ -84,11 +87,11 @@ roomsContainer.addEventListener('click', event => {
       return;
     };
     saveBooking(event);
-    replaceButton(event);
   };
 });
 
 
+// Functions
 function hide(element) {
   element.classList.add('hidden');
 };
@@ -114,7 +117,8 @@ function getLogin(event) {
     .then(value => {
       customer = new Customer(value[0], allRooms, allBookings);
       updateCustomerInfo();
-    });
+    })
+    .catch((err) => customerBookingsDisplay.innerHTML = `<h2 class="apology">${err}. Please refresh and try again</h2>`);
 
     badLogin.classList.add('hidden');
     hide(loginPage);
@@ -131,7 +135,8 @@ function updateCustomerInfo() {
 
   helloCustomer.innerText = `${customer.name.split(' ')[0]}`;
 
-  customer.hotel.resetBoth();
+  customer.hotel.reset('selectedDate');
+  customer.hotel.reset('selectedType');
   customer.trackSpending();
   
   updateCustomerDisplay('bookings');
@@ -208,8 +213,10 @@ function switchPage(event) {
 
   calendarInput.value = '';
   filterRadios.forEach(radio => radio.checked = false);
-  customer.hotel.resetBoth();
-  hotel.resetBoth();
+  customer.hotel.reset('selectedDate');
+  customer.hotel.reset('selectedType');
+  hotel.reset('selectedDate');
+  hotel.reset('selectedType');
 
   if (event.target.dataset.active === 'false') {
     event.target.dataset.value === 'new-bookings' ? switchToNewBooking() : switchToProfile();
@@ -241,7 +248,7 @@ function switchToProfile() {
 function toggleProfileFilter(event) {
   if (customer.hotel.selectedType === event.target.dataset.filter) {
     event.target.checked = false;
-    customer.hotel.resetType();
+    customer.hotel.reset('selectedType');
     customer.hotel.selectedDate ? filterByDate(customer.hotel.selectedDate) : updateCustomerDisplay('bookings');
   } else {
     filterByType(event.target.dataset.filter);
@@ -252,21 +259,21 @@ function toggleProfileFilter(event) {
 function toggleNewBookingFilter(event) {
   if (hotel.selectedType === event.target.dataset.filter) {
     event.target.checked = false;
-    hotel.resetType();
+    hotel.reset('selectedType');
     hotel.selectedDate ? filterByDate(hotel.selectedDate) : updateNewBookingDisplay('allRooms');
   } else {
     filterByType(event.target.dataset.filter);
     resetOtherBoxes(event.target.id);
-  }
+  };
 };
 
 function filterByDate(date) {
   if (!date) {
     if (dashPage) {
-      customer.hotel.resetDate();
+      customer.hotel.reset('selectedDate');
       customer.hotel.selectedType ? filterByType(customer.hotel.selectedType) : updateCustomerDisplay('bookings');
     } else {
-      hotel.resetDate();
+      hotel.reset('selectedDate');
       hotel.selectedType ? filterByType(hotel.selectedType) : updateNewBookingDisplay('allRooms');
     };
     return;
@@ -293,7 +300,7 @@ function filterByDate(date) {
   } else {
     hotel.roomFilterDate(reformattedDate);
     updateNewBookingDisplay('filteredByDate');
-  }
+  };
 };
 
 function filterByType(filter) {
@@ -342,6 +349,11 @@ function saveBooking(event) {
   .then(value => {
     customer.hotel.saveBooking(value[0].newBooking);
     hotel.saveBooking(value[0].newBooking);
+    replaceButton(event);
+  })
+  .catch((err) => {
+    newBookingHeader.style.color = 'red';
+    newBookingHeader.innerText = `${err}. Please Try Again Later.`;
   });
 };
 

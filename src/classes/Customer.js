@@ -13,9 +13,9 @@ class Customer {
   };
 
   trackSpending() {
-    this.spent = this.hotel.bookings.reduce((acc, booking) => {
+    this.spent = (this.hotel.bookings.reduce((acc, booking) => {
       return acc += this.hotel.allRooms.find(room => booking.roomNumber === room.number).cost;
-    }, 0).toFixed(2);
+    }, 0) * 100) / 100;
   };
 };
 

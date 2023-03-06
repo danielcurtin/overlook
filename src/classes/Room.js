@@ -1,5 +1,3 @@
-import Booking from "./Booking";
-
 class Room {
   constructor(roomObject) {
     this.number = roomObject.number;

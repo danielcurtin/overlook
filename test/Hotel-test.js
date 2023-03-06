@@ -36,6 +36,7 @@ describe('Hotel', () => {
 
   it('should be able to select a type to filter by', () => {
     allBookings[0].roomNumber = 1;
+    allBookings[1].roomNumber = 2;
 
     hotel = new Hotel(allRooms, allBookings);
 
@@ -64,8 +65,10 @@ describe('Hotel', () => {
     allBookings[0].roomNumber = 1;
     allBookings[0].date = '2022/02/11';
 
-    hotel.selectType('residential suite');
-    hotel.selectDate('2022/02/11');
+    hotel.selectedType = 'residential suite';
+    hotel.selectedDate = '2022/02/11';
+
+    hotel.filterBoth();
 
     expect(hotel.filteredBoth).to.be.an('array');
     expect(hotel.filteredBoth.length).to.equal(1);
@@ -76,10 +79,17 @@ describe('Hotel', () => {
     hotel.selectedType = 'suite';
     hotel.selectedDate = '2023/01/01';
 
-    hotel.resetDate();
-    hotel.resetType();
+    hotel.reset('selectedDate');
+    hotel.reset('selectedType');
 
     expect(hotel.selectedDate).to.equal(undefined);
     expect(hotel.selectedType).to.equal(undefined);
+  });
+
+  it('should be able to save new bookings', () => {
+    hotel.selectDate('2023/06/12');
+    hotel.saveBooking(allRooms[0]);
+
+    expect(hotel.bookings[0]).to.be.an.instanceOf(Booking);
   });
 });
