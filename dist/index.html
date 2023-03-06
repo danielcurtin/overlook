@@ -13,7 +13,7 @@
 <body>
   <img class="bgImg" src="./images/bg-image.jpg" alt="sea waves on rock formation during sunrise">
   <div class="dim"></div>
-  <section class="loginPage" id="login-page">
+  <section class="loginPage hidden" id="login-page">
     <h1 class="welcomeMsg">Welcome To Overlook</h1>
     <div class="loginFormContainer">
       <h3 class="badLogin hidden" id="bad-login">Invalid username or password, please try again.</h3>
@@ -30,7 +30,7 @@
       </form>
     </div>
   </section>
-  <main class="actionPage hidden" id="action-page">
+  <main class="actionPage" id="action-page">
     <section class="userPage">
       <nav class="sidebarNav" id="side-nav">
         <div class="userProfilePic">
@@ -66,7 +66,7 @@
       </nav>
       <section class="mainUserActions">
         <header class="navBanner" id="nav-banner">
-          <h3 class="helloCustomer">Hello, <span id="hello-customer">Customer</span>!</h3>
+          <h3 class="helloCustomer">Hello, <span id="hello-customer">Robbie</span>!</h3>
           <h3 class="pageType" id="page-type">My Bookings</h3>
           <div class="bannerButtonsContainer">
             <button aria-label="View Rooms Button" class="bannerButton roomsList fa-solid fa-bed" data-active="false" data-value="new-bookings" id="new-bookings-button"></button>
@@ -79,7 +79,32 @@
             <h2 class="spentHead" tabindex="0">Thank you for spending <span class="amountSpent" id="amount-spent">$123.45</span> with us!</h2>
           </section>
           <section class="customerBookings" id="customer-bookings" tabindex="0">
-            <!-- Customer bookings get added here -->
+            <article class="room" tabindex="0">
+              <img src="./images/residential suite.jpg" alt="Picture of residential suite">
+              <div class="roomBottom">
+                <header class="roomInfo">
+                  <h2 class="roomType">residential suite</h2>
+                  <h3 class="sizeAndCount">2 twin</h3>
+                </header>
+                <header class="bookedDate">
+                  <h2 class="bookedDateHead">Booked</h2>
+                  <h3 class="dateBooked">01/16/2023</h3>
+                </header>
+              </div>
+            </article>
+            <article class="room" tabindex="0">
+              <img src="./images/suite.jpg" alt="Picture of suite">
+              <div class="roomBottom">
+                <header class="roomInfo">
+                  <h2 class="roomType">suite</h2>
+                  <h3 class="sizeAndCount">1 king</h3>
+                </header>
+                <header class="bookedDate">
+                  <h2 class="bookedDateHead">Booked</h2>
+                  <h3 class="dateBooked">11/04/2022</h3>
+                </header>
+              </div>
+            </article>
           </section>
         </section>
 
