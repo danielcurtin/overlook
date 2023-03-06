@@ -25,18 +25,6 @@ new AirDatepicker('#calendar', {
   onSelect: object => filterByDate(object.formattedDate)
 });
 
-// APIs
-import { getData, postBooking } from './api-calls';
-
-let allRooms, allBookings, hotel, customer, dashPage;
-
-Promise.all([getData('customers'), getData('rooms'), getData('bookings')])
-.then(values => {
-  allRooms = values[1].rooms.map(room => new Room(room));
-  allBookings = values[2].bookings.map(booking => new Booking(booking));
-  hotel = new Hotel(allRooms, allBookings);
-});
-
 // Elements
 const loginPage = document.querySelector('#login-page');
 const loginButton = document.querySelector('#submit-login');
@@ -59,6 +47,22 @@ const dashboard = document.querySelector('#dashboard-container');
 const newBookingsDisplay = document.querySelector('#rooms-container');
 const newBookingHeader = document.querySelector('#rooms-header-date');
 const roomsContainer = document.querySelector('#new-bookings');
+
+// APIs
+import { getData, postBooking } from './api-calls';
+
+let allRooms, allBookings, hotel, customer, dashPage;
+
+Promise.all([getData('customers'), getData('rooms'), getData('bookings')])
+.then(values => {
+  allRooms = values[1].rooms.map(room => new Room(room));
+  allBookings = values[2].bookings.map(booking => new Booking(booking));
+  hotel = new Hotel(allRooms, allBookings);
+})
+.catch(() => {
+  badLogin.classList.remove('hidden');
+  badLogin.innerText = 'Server Error. Please refresh and try again.';
+});
 
 
 // Event Listeners
@@ -83,7 +87,6 @@ roomsContainer.addEventListener('click', event => {
       return;
     };
     saveBooking(event);
-    replaceButton(event);
   };
 });
 
@@ -114,7 +117,8 @@ function getLogin(event) {
     .then(value => {
       customer = new Customer(value[0], allRooms, allBookings);
       updateCustomerInfo();
-    });
+    })
+    .catch((err) => customerBookingsDisplay.innerHTML = `<h2 class="apology">${err}. Please refresh and try again</h2>`);
 
     badLogin.classList.add('hidden');
     hide(loginPage);
@@ -345,9 +349,11 @@ function saveBooking(event) {
   .then(value => {
     customer.hotel.saveBooking(value[0].newBooking);
     hotel.saveBooking(value[0].newBooking);
+    replaceButton(event);
   })
-  .catch(() => {
-    newBookingHeader.innerText = 'Server Error. Please Try Again Later.';
+  .catch((err) => {
+    newBookingHeader.style.color = 'red';
+    newBookingHeader.innerText = `#{err}. Please Try Again Later.`;
   });
 };
 

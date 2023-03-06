@@ -1,7 +1,12 @@
 function getData(type) {
   return fetch(`http://localhost:3001/api/v1/${type}`)
-  .then(res => res.json())
-  .catch(err => alert(`Server Error: ${err}. Please try again later.`));
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error('Path not found. Try a different Path.');
+    };
+  });
 };
 
 function postBooking(userID, date, roomNumber) {
@@ -16,8 +21,13 @@ function postBooking(userID, date, roomNumber) {
       'Content-Type': 'application/json'
     }
   })
-  .then(res => res.json())
-  .catch(err => console.log(err));
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error('Booking Failed. Please try again.');
+    };
+  })
 };
 
 export { getData, postBooking };
